@@ -5,13 +5,14 @@ $gpos = Get-GPO -all | select DisplayName, Description, GPOStatus | sort-object 
 $array = @()
 
 foreach ($gpo in $gpos){ 
-    #$links = (Get-GPInheritance -Target $gpo).GpoLinks | Select Enabled, Target
+    
     $OUTGPO = [PSCustomObject] @{
         'Name' = $gpo.DisplayName
         'Enabled' = $gpo.GPOStatus
         'Description' = $gpo.Description
     }
-    
+    Write-host "Processing " -NoNewline
+    Write-host $OUTGPO.Name -ForegroundColor Yellow
     $array += $OUTGPO
 }
 
