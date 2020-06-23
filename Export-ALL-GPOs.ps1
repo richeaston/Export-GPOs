@@ -1,7 +1,5 @@
-cls
-$scriptpath = $MyInvocation.MyCommand.Path
-$dir = Split-Path $scriptpath
-$gpos = Get-GPO -all | select DisplayName, Description, GPOStatus | sort-object DisplayName
+Clear-Host
+$gpos = Get-GPO -all | Select-Object DisplayName, Description, GPOStatus | sort-object DisplayName
 $array = @()
 
 foreach ($gpo in $gpos){ 
@@ -16,4 +14,4 @@ foreach ($gpo in $gpos){
     $array += $OUTGPO
 }
 
-$array | Sort name | Out-Gridview -Title "Group Policies" -OutputMode Multiple
+$array | Sort-Object name | Out-Gridview -Title "Group Policies" -OutputMode Multiple
